@@ -24,9 +24,10 @@ public class PlayerController : NetworkBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start () 
+    {
         rb = GetComponent<Rigidbody2D>();
-	}
+    }
 	
     /**
      * change direction and move player
@@ -67,20 +68,24 @@ public class PlayerController : NetworkBehaviour {
         this.direction = dir;
     }
 
-	// Update is called once per frame
+    // Update is called once per frame
     // please note that this controller is fairly simple, so the game does
     // not feel right yet - the player controls do not react smoothly.
-	void Update () {
+    void Update () {
         // every frame we slow down the player, no matter if he is local 
         // or server
         if (rb != null)
         {
             rb.velocity *= 0.5f;
         }
+
+        // ignore keypress for other player
         if (!isLocalPlayer)
         {
             return;
         }
+
+        // WASD or Arrow keys
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
         if (horizontal > 0) {
